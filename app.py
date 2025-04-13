@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request,redirect
 from  models import db, StudentModel
+from flask import request
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///student.db'
@@ -12,6 +13,7 @@ def create_table():
 
 with app.app_context():
     create_table()
+
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
