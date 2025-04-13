@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-class sStudent(db.Model):
+class StudentModel(db.Model):
         __tablename__ = "student"
 
         id = db.Column(db.Integer, primary_key=True)     
@@ -22,3 +22,5 @@ class sStudent(db.Model):
                 self.hobbies = hobbies
                 self.country = country
 
+        def __repr__(self):
+                return f"{self.first_name} {self.last_name}"
