@@ -75,12 +75,12 @@ def update(id):
                 country = request.form['country']
 
                 student= StudentModel(
-                    first_name = firest_name
-                    last_name = last_name
-                    email = email
-                    password = password
-                    gender = gender
-                    hobbies = hobbies
+                    first_name = first_name,
+                    last_name = last_name,
+                    email = email,
+                    password = password,
+                    gender = gender,
+                    hobbies = hobbies,
                     country = country
                 )
                 db.sesssion.add(student)
