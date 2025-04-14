@@ -51,13 +51,54 @@ def RetrieveList():
     return render_template("index.html",students=students)
 
 
+
+
+@app.route('/<int:id>/edit', methods = ['GET','POST'])
+
+def update(id):
+    student = StudentModel.query.filter_by(id=id).first()
+     
+    if request.method == "POST":
+            db.session.delete(student) 
+            db.session.commit()
+        
+            if student:
+                hobby   =request.form.getlist('hobbies')
+                #hobbies = ",".join(map(str, hobby))
+                hobbies = ",".join(map(str, hobby))
+                firest_name = request.form['first_name']
+                last_name =request.form['last_name']
+                email = request.form['email']
+                password =request.form['password']
+                gender =request.form['gender']
+                hobbies = hobbies
+                country = request.form['country']
+
+                student= StudentModel(
+                    first_name = firest_name
+                    last_name = last_name
+                    email = email
+                    password = password
+                    gender = gender
+                    hobbies = hobbies
+                    country = country
+                )
+                db.sesssion.add(student)
+                db.session.commit()
+                return redirect('/')
+            return f"Student with id {id} Does nit exist"
+
+    return render_template('update.html', student = student)
+
+        
+
 @app.route("/<int:id>/delete", methods=["GET", "POST"])
 
 def delete(id):
-    students = StudentModel.query.filter_by(id=id).first()  
+    students = StudentModel.query.filter_by(id=id).first() 
     if request.method == "POST":
         if students: 
-            db.session.delete(students)
+            db.session.delete(students) 
             db.session.commit()
             return redirect('/')    
         abort(404)
