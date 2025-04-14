@@ -31,7 +31,7 @@ def create():
         hobbies = hobbies
         country = request.form["country"]
 
-        students = StudentModel(
+        student = StudentModel(
             first_name=first_name,
             last_name=last_name,
             email=email,
@@ -47,6 +47,7 @@ def create():
 @app.route('/', methods =['GET','POST'])
 def RetrieveList():
     students = StudentModel.query.all()
+    print(students)
     return render_template("index.html",students=students)
     
 app.run(host='localhost', port=5000 )
